@@ -66,7 +66,7 @@ public class Boid : MonoBehaviour
         //Si notre Boid a une cible
         if (target != null)
         {
-            //Vecteur target -> boid
+            //Vecteur position -> target
             Vector3 offsetToTarget = (target.position - position);
             //Defini l'acceleration du Boid
             acceleration = SteerTowards(offsetToTarget) * settings.poidCible;

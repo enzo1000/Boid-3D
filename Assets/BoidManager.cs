@@ -11,9 +11,9 @@ public class BoidManager : MonoBehaviour
     public ComputeShader compute;
     Boid[] boids;
 
+    //On initialise tout nos Boid au lancement de la scene
     void Start()
     {
-        //On initialise tout nos Boid au lancement de la scene
         boids = FindObjectsOfType<Boid>();
         foreach (Boid b in boids)
         {
@@ -25,7 +25,6 @@ public class BoidManager : MonoBehaviour
     {
         if (boids != null)
         {
-
             int numBoids = boids.Length;
             var boidData = new BoidData[numBoids];
 
@@ -45,6 +44,7 @@ public class BoidManager : MonoBehaviour
             compute.SetFloat("rayonDeRepulsion", settings.rayonDeRepulsion);
 
             int threadGroups = Mathf.CeilToInt(numBoids / (float)threadGroupSize);
+            //Execute notre Compute Shader
             compute.Dispatch(0, threadGroups, 1, 1);
 
             boidBuffer.GetData(boidData);
